@@ -1,0 +1,34 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/styles.css" />
+        <title>Dev Blog</title>
+    </head>
+    <body>
+        <header>
+            <h1>The Dev Blog</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#Dashboard">Dashboard</a></li>
+                <li><a href="#Login">Login</a></li>
+            </ul>
+        </nav>
+        <main>
+            {{{body}}}
+        </main>
+        <!-- The below is hidden by default -->
+        <div id="modal" class="modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2 id="modal-header-message">Prompt</h2>
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+        </div>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
