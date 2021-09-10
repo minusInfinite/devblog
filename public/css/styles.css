@@ -1,5 +1,5 @@
 /* Normalize from NPM */
-@import "../../node_modules/normalize.css/normalize.css";
+@import "normalize.css";
 
 /* Google Font Import https://fonts.google.com/specimen/Anonymous+Pro*/
 @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap");
@@ -97,7 +97,7 @@ main {
 .post {
     width: 80vw;
     margin: 0.5rem 0;
-    border: 1px solid var(--dark-color);
+    border: 2px solid var(--dark-color);
 }
 
 .post-header {
