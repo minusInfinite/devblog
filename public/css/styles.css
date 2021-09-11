@@ -16,6 +16,7 @@ html,
 body {
     min-height: 100vh;
     min-width: 95vw;
+    overflow-x: hidden;
 }
 
 body {
@@ -170,4 +171,45 @@ main {
     color: var(--hover-color);
     text-decoration: none;
     cursor: pointer;
+}
+
+.forms {
+    display: flex;
+    align-items: center;
+    width: 80vw;
+    height: 50vh;
+}
+
+.forms fieldset {
+    height: 75%;
+}
+
+.forms legend {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.forms form label {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.forms form input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: initial;
+}
+
+.forms form input:not:focus {
+    border: 3px solid var(--dark-color);
+}
+
+.forms form input[type="submit"] {
+    background-color: var(--dark-color);
+    color: var(--base-color);
+    margin: 0.2rem 0.5rem;
+    width: 35%;
+    float: right;
 }

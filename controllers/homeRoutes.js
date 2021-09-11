@@ -23,4 +23,12 @@ homeRouter.get("/", async (req, res) => {
     }
 })
 
+homeRouter.get("/login", async (req, res) => {
+    try {
+        res.render("login")
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 module.exports = homeRouter
