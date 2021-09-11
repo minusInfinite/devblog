@@ -22,8 +22,11 @@ app.use(routes)
 
 // app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}`))
 
-sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () =>
-        console.log(`Server Running http://localhost${PORT}`)
-    )
-})
+sequelize
+    .sync({ force: false })
+    .then(() => {
+        app.listen(PORT, () =>
+            console.log(`Server Running http://localhost:${PORT}`)
+        )
+    })
+    .catch((err) => console.log(err))
