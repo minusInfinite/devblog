@@ -6,6 +6,7 @@
  */
 const isAuth = (req, res, next) => {
     if (!req.session.logged_in) {
+        res.sendStatus(401)
         res.redirect("/login")
     } else {
         next()
