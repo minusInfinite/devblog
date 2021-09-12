@@ -54,11 +54,15 @@
                     <fieldset>
                         <legend>Sign Up</legend>
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" />
+                        <input type="text" id="name-signup" name="name" />
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" />
+                        <input type="email" id="email-signup" name="email" />
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" />
+                        <input
+                            type="password"
+                            id="password-signup"
+                            name="password"
+                        />
                         <input type="submit" value="Sign Up" />
                     </fieldset>
                 </form>
@@ -66,9 +70,13 @@
                     <fieldset>
                         <legend>Login</legend>
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" />
+                        <input type="email" id="email-login" name="email" />
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" />
+                        <input
+                            type="password"
+                            id="password-login"
+                            name="password"
+                        />
                         <input type="submit" value="Login" />
                     </fieldset>
                 </form>
@@ -79,8 +87,9 @@
             <div class="modal-container">
                 <div class="modal-header">
                     <h2 id="modal-header-message">Prompt</h2>
-                    <span class="close">&times;</span>
+                    <span class="modal-close">&times;</span>
                 </div>
+                <div id="modal-content">Content</div>
             </div>
         </div>
         <script src="./js/script.js"></script>
