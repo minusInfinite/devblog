@@ -168,6 +168,13 @@ main {
     transition: background-color 1s ease-out;
     transition: color 1s ease-out;
 }
+.new-post-btn:hover,
+.new-post-btn:focus {
+    background-color: var(--base-color);
+    color: var(--dark-color);
+    border: 2px solid var(--dark-color);
+    cursor: pointer;
+}
 
 .post-form form {
     display: flex;
@@ -304,10 +311,12 @@ main {
 }
 
 .user-form form input[type="submit"]:hover,
-.comment-form form input[type="submit"]:hover {
+.comment-form form input[type="submit"]:hover,
+.post-form input[type="submit"]:hover {
     background-color: var(--base-color);
     color: var(--dark-color);
     border: 2px solid var(--dark-color);
+    cursor: pointer;
 }
 
 .modal {

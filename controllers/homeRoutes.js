@@ -46,6 +46,7 @@ homeRouter.get("/new/post", isAuth, async (req, res) => {
     try {
         res.render("newedit", {
             newPost: true,
+            editPost: false,
             editComment: false,
             logged_in: req.session.logged_in,
         })
@@ -63,6 +64,7 @@ homeRouter.get("/edit/post/:id", isAuth, async (req, res) => {
         res.render("newedit", {
             post,
             newPost: false,
+            editPost: true,
             editComment: false,
             logged_in: req.session.logged_in,
         })
@@ -80,6 +82,7 @@ homeRouter.get("/edit/comment/:id", isAuth, async (req, res) => {
         res.render("newedit", {
             comment,
             newPost: false,
+            editPost: false,
             editComment: true,
             logged_in: req.session.logged_in,
         })

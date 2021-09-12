@@ -1,5 +1,5 @@
 <section>
-    <article class="post">
+    <article class="post" data-id="{{post.id}}">
         <div class="post-header">
             <h2>{{post.title}}</h2>
             <span class="timestamp">posted by
@@ -29,13 +29,20 @@
             </div>
         </div>
     {{/each}}
-    <div class="comment-form">
-        <form>
-            <fieldset>
-                <legend>Add Comment</legend>
-                <textarea></textarea>
-                <input type="submit" value="Add Comment" />
-            </fieldset>
-        </form>
-    </div>
+    {{#if logged_in}}
+        <div class="comment-form">
+            <form>
+                <fieldset>
+                    <legend>Add Comment</legend>
+                    <label for="comment-content">Content</label>
+                    <textarea
+                        id="comment-content"
+                        name="comment-content"
+                    ></textarea>
+                    <input type="submit" id="submit" value="Add Comment" />
+                </fieldset>
+            </form>
+        </div>
+        <script src="/js/submitcomment.js"></script>
+    {{/if}}
 </section>

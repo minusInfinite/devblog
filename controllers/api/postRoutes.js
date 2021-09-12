@@ -30,6 +30,29 @@ postRouter.post("/:id", isAuth, async (req, res) => {
     }
 })
 
+postRouter.put("/:id", isAuth, async (req, res) => {
+    try {
+        const updatePost = await Post.update(
+            {
+                title: req.body.title,
+                content: req.body.content,
+            },
+            {
+                where: {
+                    id: req.params.id,
+                    user_id: req.session.user_id,
+                },
+            }
+        )
+
+        const post = await Post.findByPk(req.params.id)
+
+        res.status(201).json(post)
+    } catch (err) {
+        res.status(400).json(err)
+    }
+})
+
 postRouter.delete("/:id", isAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({
