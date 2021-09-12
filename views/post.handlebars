@@ -1,0 +1,41 @@
+<section>
+    <article class="post">
+        <div class="post-header">
+            <h2>{{post.title}}</h2>
+            <span class="timestamp">posted by
+                {{post.user.name}}
+                on
+                {{format_date post.date_created}}
+            </span>
+        </div>
+        <div class="post-content">
+            <p>
+                {{post.content}}
+            </p>
+        </div>
+    </article>
+    {{#each comments as |comment|}}
+        <div class="comment">
+            <p>
+                {{comment.content}}
+            </p>
+            <div class="comment-footer">
+                <p>
+                    <span>by
+                        {{comment.user.name}}
+                        on
+                        {{format_date comment.date_created}}</span>
+                </p>
+            </div>
+        </div>
+    {{/each}}
+    <div class="comment-form">
+        <form>
+            <fieldset>
+                <legend>Add Comment</legend>
+                <textarea></textarea>
+                <input type="submit" value="Add Comment" />
+            </fieldset>
+        </form>
+    </div>
+</section>

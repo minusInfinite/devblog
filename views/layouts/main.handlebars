@@ -3,7 +3,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="stylesheet" href="/css/styles.css" />
         <title>Dev Blog</title>
     </head>
     <body>
@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 {{#if logged_in}}
-                    <li><a href="#Dashboard">Dashboard</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="#logout" id="logout">Logout</a></li>
                 {{else}}
                     <li><a href="/login">Sign Up/Login</a></li>
@@ -34,9 +34,9 @@
                 <div id="modal-content" class="modal-content"></div>
             </div>
         </div>
-        <script src="./js/script.js"></script>
+        <script src="/js/script.js"></script>
         {{#if logged_in}}
-            <script src="./js/logout.js"></script>
+            <script src="/js/logout.js"></script>
         {{/if}}
     </body>
 </html>

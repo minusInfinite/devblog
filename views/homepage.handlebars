@@ -2,14 +2,16 @@
     {{#each posts as |post|}}
         <article class="post">
             <div class="post-header">
-                <h2>{{post.title}}</h2>
+                <h2><a href="/post/{{post.id}}">{{post.title}}</a></h2>
                 <span class="timestamp">posted by
-                    {{post.user_id}}
+                    {{post.user.name}}
                     on
-                    {{post.date_created}}</span>
+                    {{format_date post.date_created}}</span>
             </div>
             <div class="post-content">
-                {{post.content}}
+                <p>
+                    {{post.content}}
+                </p>
             </div>
         </article>
     {{/each}}
