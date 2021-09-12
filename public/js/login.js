@@ -11,7 +11,7 @@ const loginForm = async (event) => {
             headers: { "Content-Type": "application/json" },
         })
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             document.location.replace("/")
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
