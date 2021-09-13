@@ -47,7 +47,7 @@ postRouter.put("/:id", isAuth, async (req, res) => {
 
         const post = await Post.findByPk(req.params.id)
 
-        res.status(201).json(post)
+        res.status(201).json({ updatePost, post })
     } catch (err) {
         res.status(400).json(err)
     }
@@ -63,11 +63,13 @@ postRouter.delete("/:id", isAuth, async (req, res) => {
         })
 
         if (!postData) {
-            res.status(404).json({ message: "No Posts found with this ID" })
+            res.status(404).json({
+                errors: [{ message: "No Posts found with this ID" }],
+            })
             return
         }
 
-        res.status(200).json(postData)
+        res.status(204).json(postData)
     } catch (err) {
         res.status(500).json(err)
     }

@@ -95,6 +95,8 @@ nav a {
     color: inherit;
 }
 
+/* **MAIN CONTAINTER** */
+/* Flex for a responsive layout */
 main {
     display: flex;
     flex-direction: column;
@@ -102,6 +104,7 @@ main {
     align-content: center;
 }
 
+/* Posts and Comments Styles */
 .post,
 .comment {
     width: 80vw;
@@ -155,34 +158,6 @@ main {
     padding: 0 1rem;
 }
 
-.new-post-btn {
-    position: fixed;
-    bottom: 2vh;
-    left: 45vw;
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--dark-color);
-    color: var(--base-color);
-    font-weight: 600;
-    border: 2px solid rgba(0, 0, 0, 0);
-    transition: background-color 1s ease-out;
-    transition: color 1s ease-out;
-}
-.new-post-btn:hover,
-.new-post-btn:focus {
-    background-color: var(--base-color);
-    color: var(--dark-color);
-    border: 2px solid var(--dark-color);
-    cursor: pointer;
-}
-
-.post-form form {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    height: 5em;
-}
-
 .comment-footer {
     display: flex;
     justify-content: end;
@@ -210,6 +185,11 @@ main {
     font-weight: 800;
 }
 
+/* 
+    This is for a Pipe seperator between the comment Timestamp
+    and the possible comment Edit link 
+*/
+
 /* .comment-footer span::before {
     color: var(--base-color);
     font-style: normal;
@@ -220,6 +200,35 @@ main {
     color: var(--base-color);
     font-style: italic;
     margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+/* Dashboard New Post Button */
+.new-post-btn {
+    position: fixed;
+    bottom: 2vh;
+    left: 45vw;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--dark-color);
+    color: var(--base-color);
+    font-weight: 600;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: color, background-color 1s ease-out;
+}
+.new-post-btn:hover,
+.new-post-btn:focus {
+    background-color: var(--base-color);
+    color: var(--dark-color);
+    border: 2px solid var(--hover-color);
+    cursor: pointer;
+}
+
+/* New and Edit Post and Comment form styles */
+.post-form form {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 5em;
 }
 
 .post-form form {
@@ -259,6 +268,7 @@ main {
     border: 2px solid var(--dark-color);
 }
 
+/* User form Styles */
 .user-form {
     display: flex;
     align-items: center;
@@ -296,9 +306,11 @@ main {
     border: 2px solid var(--dark-color);
 }
 
+/* All Form Button Styles */
 .user-form form input[type="submit"],
 .comment-form input[type="submit"],
-.post-form input[type="submit"] {
+.post-form input[type="submit"],
+.post-form input[type="button"] {
     background-color: var(--dark-color);
     color: var(--base-color);
     font-weight: 600;
@@ -306,19 +318,24 @@ main {
     margin: 0.3rem 0.5rem;
     width: 35%;
     float: right;
-    transition: background-color 1s ease-out;
-    transition: color 1s ease-out;
+    transition: color, background-color 0.5s ease-in;
 }
 
 .user-form form input[type="submit"]:hover,
+.user-form form input[type="submit"]:focus,
 .comment-form form input[type="submit"]:hover,
-.post-form input[type="submit"]:hover {
+.comment-form form input[type="submit"]:focus,
+.post-form input[type="submit"]:hover,
+.post-form input[type="submit"]:focus,
+.post-form input[type="button"]:hover,
+.post-form input[type="button"]:focus {
     background-color: var(--base-color);
     color: var(--dark-color);
     border: 2px solid var(--dark-color);
     cursor: pointer;
 }
 
+/* Modal Styles */
 .modal {
     display: none;
     align-items: center;
