@@ -15,7 +15,7 @@ const submitContent = async (event) => {
             document.location.reload()
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
-            displayModal(JSON.stringify(errMsg))
+            displayModal(errMsg.errors[0].message)
         }
     } else {
         displayModal("No Comments provided")

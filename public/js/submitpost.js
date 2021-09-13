@@ -12,10 +12,10 @@ const submitPost = async (event) => {
         })
 
         if (response.status === 201) {
-            document.location.assign("/")
+            document.location.assign("/dashboard")
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
-            displayModal(JSON.stringify(errMsg))
+            displayModal(errMsg.errors[0].message)
         }
     } else {
         displayModal("No Comments provided")

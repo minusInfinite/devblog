@@ -16,7 +16,7 @@ const displayModal = function (message) {
     }
 
     model.style.display = "flex"
-    const content = document.createElement("p")
+    const content = document.createElement("pre")
     content.textContent = message
     modelContent.appendChild(content)
 }
