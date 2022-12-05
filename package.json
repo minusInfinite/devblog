@@ -33,5 +33,6 @@
         "mysql2": "^2.3.0",
         "normalize.css": "^8.0.1",
         "sequelize": "^6.6.5"
-    }
+    },
+    "packageManager": "yarn@3.3.0"
 }
