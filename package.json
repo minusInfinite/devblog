@@ -1,38 +1,38 @@
 {
-    "name": "devblog",
-    "version": "1.0.0",
-    "description": "A simple CMS with express with handlebars",
-    "main": "server.js",
-    "scripts": {
-        "start": "yarn node server.js",
-        "dev": "yarn nodemon server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/minusInfinite/devblog.git"
-    },
-    "author": "minusinfinite <ashley@minusinfinite.net> (https://github.com/minusInfinite)",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/minusInfinite/devblog/issues"
-    },
-    "homepage": "https://github.com/minusInfinite/devblog#readme",
-    "devDependencies": {
-        "eslint": "^8.29.0",
-        "nodemon": "^3.0.3",
-        "prettier": "^3.2.5"
-    },
-    "dependencies": {
-        "bcrypt": "^5.1.0",
-        "connect-session-sequelize": "^7.1.5",
-        "dotenv": "^16.0.3",
-        "express": "^4.18.2",
-        "express-handlebars": "^7.1.2",
-        "express-session": "^1.17.3",
-        "normalize.css": "^8.0.1",
-        "pg": "^8.8.0",
-        "pg-hstore": "^2.3.4",
-        "sequelize": "^6.26.0"
-    },
-    "packageManager": "yarn@3.3.0"
+        "name": "devblog",
+        "version": "1.0.0",
+        "description": "A simple CMS with express with handlebars",
+        "main": "server.js",
+        "scripts": {
+                "start": "yarn node server.js",
+                "dev": "yarn nodemon server.js"
+        },
+        "repository": {
+                "type": "git",
+                "url": "git+https://github.com/minusInfinite/devblog.git"
+        },
+        "author": "minusinfinite <ashley@minusinfinite.net> (https://github.com/minusInfinite)",
+        "license": "MIT",
+        "bugs": {
+                "url": "https://github.com/minusInfinite/devblog/issues"
+        },
+        "homepage": "https://github.com/minusInfinite/devblog#readme",
+        "devDependencies": {
+                "eslint": "^8.29.0",
+                "nodemon": "^3.0.3",
+                "prettier": "^3.2.5"
+        },
+        "dependencies": {
+                "bcrypt": "^5.1.0",
+                "connect-session-sequelize": "^7.1.5",
+                "dotenv": "^16.0.3",
+                "express": "^4.18.2",
+                "express-handlebars": "^7.1.2",
+                "express-session": "^1.17.3",
+                "normalize.css": "^8.0.1",
+                "pg": "^8.8.0",
+                "pg-hstore": "^2.3.4",
+                "sequelize": "^6.26.0"
+        },
+        "packageManager": "yarn@3.3.0"
 }
