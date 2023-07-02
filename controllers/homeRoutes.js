@@ -21,7 +21,8 @@ homeRouter.get("/", async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
@@ -38,7 +39,8 @@ homeRouter.get("/dashboard", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
@@ -51,7 +53,8 @@ homeRouter.get("/new/post", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
@@ -69,7 +72,8 @@ homeRouter.get("/edit/post/:id", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
@@ -87,7 +91,8 @@ homeRouter.get("/edit/comment/:id", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
@@ -118,8 +123,8 @@ homeRouter.get("/post/:id", async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.log(err)
-        res.status(500).json(err)
+        console.error(err)
+        res.sendStatus(500)
     }
 })
 
