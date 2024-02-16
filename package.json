@@ -4,7 +4,6 @@
     "description": "A simple CMS with express with handlebars",
     "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "start": "yarn node server.js",
         "dev": "yarn nodemon server.js"
     },
@@ -20,15 +19,15 @@
     "homepage": "https://github.com/minusInfinite/devblog#readme",
     "devDependencies": {
         "eslint": "^8.29.0",
-        "nodemon": "^2.0.20",
-        "prettier": "^2.8.0"
+        "nodemon": "^3.0.3",
+        "prettier": "^3.2.5"
     },
     "dependencies": {
         "bcrypt": "^5.1.0",
         "connect-session-sequelize": "^7.1.5",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "express-handlebars": "^6.0.6",
+        "express-handlebars": "^7.1.2",
         "express-session": "^1.17.3",
         "normalize.css": "^8.0.1",
         "pg": "^8.8.0",
