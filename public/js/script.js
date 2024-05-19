@@ -20,3 +20,8 @@ const displayModal = function (message) {
     content.textContent = message
     modelContent.appendChild(content)
 }
+
+const getRoot = function () {
+    const root = window.location.pathname.split("/")[1]  
+    return root
+}

@@ -2,7 +2,7 @@
     {{#each posts as |post|}}
         <article class="post">
             <div class="post-header">
-                <h2><a href="/post/{{post.id}}">{{post.title}}</a></h2>
+                <h2><a href="{{root}}post/{{post.id}}">{{post.title}}</a></h2>
                 <span class="timestamp">posted by
                     {{post.user.name}}
                     on

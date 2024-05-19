@@ -2,8 +2,9 @@ const { Post, User, Comment } = require("../models")
 const isAuth = require("../utils/auth")
 
 const homeRouter = require("express").Router()
+const basePath = process.env.ROOT ? `/${process.env.ROOT}/` : "./"
 
-homeRouter.get("/", async (req, res) => {
+homeRouter.get("/", async (req, res,next) => {
     try {
         const postData = await Post.findAll({
             include: [
@@ -14,57 +15,58 @@ homeRouter.get("/", async (req, res) => {
             ],
         })
 
-        const posts = postData.map((post) => post.get({ plain: true }))
+        const posts = postData.map((post) => post.get({ plain: true })).reverse()
 
         res.render("homepage", {
+            basePath,
             posts,
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
-homeRouter.get("/dashboard", isAuth, async (req, res) => {
+homeRouter.get("/dashboard", isAuth, async (req, res,next) => {
     try {
         const postData = await Post.findAll({
             where: { user_id: req.session.user_id },
         })
 
-        const posts = postData.map((post) => post.get({ plain: true }))
+        const posts = postData.map((post) => post.get({ plain: true })).reverse()
 
         res.render("dashboard", {
+            basePath,
             posts,
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
-homeRouter.get("/new/post", isAuth, async (req, res) => {
+homeRouter.get("/new/post", isAuth, async (req, res,next) => {
     try {
         res.render("newedit", {
+            basePath,
             newPost: true,
             editPost: false,
             editComment: false,
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
-homeRouter.get("/edit/post/:id", isAuth, async (req, res) => {
+homeRouter.get("/edit/post/:id", isAuth, async (req, res,next) => {
     try {
         const postData = await Post.findByPk(req.params.id)
 
         const post = postData.get({ plain: true })
 
         res.render("newedit", {
+            basePath,
             post,
             newPost: false,
             editPost: true,
@@ -72,18 +74,18 @@ homeRouter.get("/edit/post/:id", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
-homeRouter.get("/edit/comment/:id", isAuth, async (req, res) => {
+homeRouter.get("/edit/comment/:id", isAuth, async (req, res,next) => {
     try {
         const commentData = await Comment.findByPk(req.params.id)
 
         const comment = commentData.get({ plain: true })
 
         res.render("newedit", {
+            basePath,
             comment,
             newPost: false,
             editPost: false,
@@ -91,12 +93,11 @@ homeRouter.get("/edit/comment/:id", isAuth, async (req, res) => {
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
-homeRouter.get("/post/:id", async (req, res) => {
+homeRouter.get("/post/:id", async (req, res,next) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
@@ -118,13 +119,13 @@ homeRouter.get("/post/:id", async (req, res) => {
         )
 
         res.render("post", {
+            basePath,
             post,
             comments,
             logged_in: req.session.logged_in,
         })
     } catch (err) {
-        console.error(err)
-        res.sendStatus(500)
+        next()
     }
 })
 
@@ -134,7 +135,7 @@ homeRouter.get("/login", (req, res) => {
         return
     }
 
-    res.render("login")
+    res.render("login",{basePath})
 })
 
 module.exports = homeRouter

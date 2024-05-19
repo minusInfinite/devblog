@@ -6,14 +6,14 @@ const editPost = async (event) => {
     const content = document.querySelector("#edit-post-content").value.trim()
 
     if (title && content) {
-        const response = await fetch(`/api/posts/${postID}`, {
+        const response = await fetch(`${getRoot()}/api/posts/${postID}`, {
             method: "PUT",
             body: JSON.stringify({ title, content }),
             headers: { "Content-Type": "application/json" },
         })
 
         if (response.status === 201) {
-            document.location.assign("/dashboard")
+            document.location.assign(`${getRoot()}/dashboard`)
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             displayModal(errMsg.errors[0].message)
@@ -28,12 +28,12 @@ const deletePost = async (event) => {
 
     const postID = document.querySelector("#post").dataset.id
 
-    const response = await fetch(`/api/posts/${postID}`, {
+    const response = await fetch(`./api/posts/${postID}`, {
         method: "DELETE",
     })
 
     if (response.status === 204) {
-        document.location.assign("/dashboard")
+        document.location.assign(`${getRoot()}/dashboard`)
     } else {
         const errMsg = await response.json((msg) => JSON.parse(msg))
         displayModal(errMsg.errors[0].message)
