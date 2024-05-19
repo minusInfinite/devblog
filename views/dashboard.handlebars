@@ -1,6 +1,6 @@
 <section>
     {{#each posts as |post|}}
-        <a href="/edit/post/{{post.id}}">
+        <a href="{{root}}edit/post/{{post.id}}">
             <div class="post-list">
                 <h2>{{post.title}}</h2>
                 <span class="timestamp">posted on
@@ -11,4 +11,4 @@
     <button class="new-post-btn" type="button">+ New Post</button>
 </section>
 
-<script src="./js/post.js"></script>
+<script src="{{root}}js/post.js"></script>

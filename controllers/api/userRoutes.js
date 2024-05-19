@@ -2,7 +2,7 @@ const { User } = require("../../models")
 
 const userRouter = require("express").Router()
 
-userRouter.post("/", async (req, res) => {
+/*userRouter.post("/", async (req, res) => {
     try {
         const userData = await User.create(req.body)
 
@@ -15,7 +15,7 @@ userRouter.post("/", async (req, res) => {
     } catch (err) {
         res.status(400).json(err)
     }
-})
+})*/
 
 userRouter.post("/login", async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const signupForm = async (event) => {
+/*const signupForm = async (event) => {
     event.preventDefault()
 
     const name = document.querySelector("#name-signup").value.trim()
@@ -6,7 +6,7 @@ const signupForm = async (event) => {
     const password = document.querySelector("#password-signup").value.trim()
 
     if (name && email && password) {
-        const response = await fetch("/api/users", {
+        const response = await fetch(`${root}/api/users`, {
             method: "POST",
             body: JSON.stringify({ name, email, password }),
             headers: { "Content-Type": "application/json" },
@@ -21,7 +21,7 @@ const signupForm = async (event) => {
     } else {
         displayModal("Missing Inputs in Login fields")
     }
-}
+} */
 
 const loginForm = async (event) => {
     event.preventDefault()
@@ -30,14 +30,14 @@ const loginForm = async (event) => {
     const password = document.querySelector("#password-login").value.trim()
 
     if (email && password) {
-        const response = await fetch("/api/users/login", {
+        const response = await fetch(`/${getRoot()}/api/users/login`, {
             method: "POST",
             body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
         })
 
         if (response.status === 200) {
-            document.location.replace("/")
+            document.location.replace(`../`)
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             displayModal(errMsg.errors[0].message)
@@ -48,4 +48,4 @@ const loginForm = async (event) => {
 }
 
 document.querySelector(".login").addEventListener("submit", loginForm)
-document.querySelector(".signup").addEventListener("submit", signupForm)
+/*document.querySelector(".signup").addEventListener("submit", signupForm)*/
