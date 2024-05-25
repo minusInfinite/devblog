@@ -71,7 +71,6 @@ postRouter.delete("/:id", isAuth, async (req, res) => {
 
         res.status(204).json(postData)
     } catch (err) {
-        console.error(err)
         res.sendStatus(500)
     }
 })

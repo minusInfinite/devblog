@@ -5,15 +5,16 @@ const loginForm = async (event) => {
     try {
         const email = document.querySelector("#email-login").value.trim()
         const password = document.querySelector("#password-login").value.trim()
-        const csrf_token = await getToken()
+        const { token } = getToken()
 
         if (email && password) {
             const response = await fetch(`./api/users/login`, {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
-                headers: csrf_token ?
-                    { "Content-Type": "application/json", "x-csrf-token": csrf_token } :
-                    { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-csrf-token": token
+                }
             })
 
             if (response.status === 200) {
@@ -30,5 +31,5 @@ const loginForm = async (event) => {
     }
 }
 
-document.querySelector(".login").addEventListener("submit", loginForm)
+document.getElementById("login").addEventListener("submit", loginForm)
 /*document.querySelector(".signup").addEventListener("submit", signupForm)*/

@@ -3,12 +3,16 @@ const submitContent = async (event) => {
 
     const postId = document.querySelector(".post").dataset.id
     const content = document.querySelector("#comment-content").value.trim()
+    const { token } = getToken()
 
     if (content) {
         const response = await fetch(`${getRoot()}api/posts/${postId}`, {
             method: "POST",
             body: JSON.stringify({ content }),
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "x-csrf-token": token
+            }
         })
 
         if (response.status === 201) {

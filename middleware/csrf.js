@@ -1,31 +1,35 @@
 const { doubleCsrf } = require("csrf-csrf")
-
 const isProd = process.env.NODE_ENV === 'production'
+const basePath = process.env.ROOT === undefined ? "/" : `/${process.env.ROOT}`
 
 const { invalidCsrfTokenError, generateToken, doubleCsrfProtection } = doubleCsrf({
     getSecret: () => {
-        return Buffer.from(process.env.PSECRET, "base64").toString("base64url")
+        return process.env.CCSECRET
     },
-    cookieName: 'x-csrf-token',
+    cookieName: "__Host-minusinfinite.x-csrf-token",
     cookieOptions: {
         sameSite: "strict",
         path: "/",
-        secure: isProd
+        secure: true
     },
     getTokenFromRequest: (req) => {
-        const content = req.headers['content-type']
-        if (content.includes('form')) {
-            return req.locals._crsf['CSRFToken']
-        } else {
-            return req.headers['x-csrf-token']
-        }
+        return req.headers["x-csrf-token"]
     }
 })
 
+/**
+ * 
+ * @param {import('express').Errback} error 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ * @param {import('express').NextFunction} next 
+ */
 const csrfErrorHandler = (error, req, res, next) => {
     if (error === invalidCsrfTokenError) {
         res.status(401).json({
-            error: "csrf-validation-error"
+            errors: [{
+                message: "csrf-validation-error"
+            },]
         })
     } else {
         next()
@@ -39,5 +43,6 @@ function getCsrfTokenHandler(req, res) {
 
 module.exports = {
     csrfProtection: [doubleCsrfProtection, csrfErrorHandler],
-    getCsrfTokenHandler
+    getCsrfTokenHandler,
+    generateToken
 }

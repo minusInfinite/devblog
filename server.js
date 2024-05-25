@@ -5,16 +5,15 @@ const cors = require("cors")
 const morgan = require("morgan")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
-const { doubleCsrf } = require("csrf-csrf")
 const exqhbs = require("express-handlebars")
 const routes = require("./controllers")
 const helpers = require("./utils/helpers")
+const makeAdmin = require("./utils/makeAdmin")
+
 
 /** @type {import('sequelize').Sequelize} */
 const sequelize = require("./config/connection")
 const SequelizeStore = require("connect-session-sequelize")(session.Store)
-const { Buffer } = require("node:buffer")
-const makeAdmin = require("./utils/makeAdmin")
 
 const PORT = process.env.PORT || 3001
 const basePath = process.env.ROOT !== undefined ? `/${process.env.ROOT}/` : "/"
@@ -44,16 +43,24 @@ const sess = {
 
 async function StartServer() {
 
+    morgan.token('req-headers', function (req, res) {
+        if (req.method === "POST")
+            return JSON.stringify(req.headers);
+    })
+
     const hbs = exqhbs.create({ helpers })
     const app = express()
 
-    app.use(morgan("dev"))
+    if (!isProd) {
+        app.use(morgan(':method :url :status :response-time ms - :res[content-length] :req-headers'));
+    } else {
+        app.use(morgan("short"))
+    }
+
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
-    if (isProd) {
-        app.set('trust-proxy', 'loopback, uniquelocal')
-    }
+    app.set('trust-proxy', 'loopback, uniquelocal')
 
     app.use(function (req, res, next) {
         res.set(
@@ -73,13 +80,13 @@ async function StartServer() {
     app.use(routes)
 
     try {
-        await sequelize.sync({ force: false, logging: console.log })
+        await sequelize.sync({ force: false })
         app.use(makeAdmin)
     } catch (e) {
         throw new Error(e)
     }
 
-    app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}`))
+    app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}, https://intranet.minusinfinite.id.au/dev`))
 
 }
 

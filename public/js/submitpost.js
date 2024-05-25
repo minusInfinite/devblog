@@ -3,18 +3,16 @@ const submitPost = async (event) => {
 
     const title = document.querySelector("#new-post-title").value.trim()
     const content = document.querySelector("#new-post-content").value.trim()
-    const csrf_token = document.querySelector("meta[name=csrf-token]") === HTMLMetaElement
-        ?
-        document.querySelector("meta[name=csrf-token]").getAttribute('content')
-        : undefined;
+    const { token } = getToken()
 
     if (title && content) {
         const response = await fetch(`${getRoot()}api/posts/`, {
             method: "POST",
             body: JSON.stringify({ title, content }),
-            headers: csrf_token ?
-                { "Content-Type": "application/json", "x-csrf-token": csrf_token } :
-                { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "x-csrf-token": token
+            }
         })
 
         if (response.status === 201) {

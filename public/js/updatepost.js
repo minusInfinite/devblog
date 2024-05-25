@@ -4,18 +4,16 @@ const editPost = async (event) => {
     const postID = document.querySelector("#post").dataset.id
     const title = document.querySelector("#edit-post-title").value.trim()
     const content = document.querySelector("#edit-post-content").value.trim()
-    const csrfToken = document.querySelector("meta[name=csrf-token]") === HTMLMetaElement
-        ?
-        document.querySelector("meta[name=csrf-token]").getAttribute('content')
-        : undefined;
+    const { token } = getToken()
 
     if (title && content) {
         const response = await fetch(`${getRoot()}api/posts/${postID}`, {
             method: "PUT",
             body: JSON.stringify({ title, content }),
-            headers: csrfToken ?
-                { "Content-Type": "application/json", "x-csrf-token": csrfToken } :
-                { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "x-csrf-token": token
+            }
         })
 
         if (response.status === 201) {
@@ -33,9 +31,13 @@ const deletePost = async (event) => {
     event.preventDefault()
 
     const postID = document.querySelector("#post").dataset.id
+    const { token } = getToken()
 
     const response = await fetch(`${getRoot()}api/posts/${postID}`, {
         method: "DELETE",
+        headers: {
+            "x-csrf-token": token
+        }
     })
 
     if (response.status === 204) {

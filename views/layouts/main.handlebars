@@ -1,12 +1,12 @@
+<!DOCTYPE html>
 <html lang="en">
-{{log _csrf}}
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {{#if CSRFToken}}
-        <meta name="csrf-token" content"{{CSRFToken}}" />
+    {{#if _csrf}}
+    <meta name="csrf-token" content="{{_csrf}}" />
     {{/if}}
     <link rel="stylesheet" href="{{basePath}}css/styles.css" />
     <link rel="icon" type="image/png" href="{{basePath}}favicon.png" />

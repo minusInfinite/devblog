@@ -12,6 +12,15 @@
     --visit-color: rgb(145, 145, 145);
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+
+}
+
 html,
 body {
     min-height: 100vh;
@@ -279,36 +288,41 @@ main {
 
 .user-form fieldset {
     height: 75%;
+    width: fit-content;
+    margin: auto;
     border: 2px groove var(--dark-color);
 }
 
-.user-form legend {
+.user-form fieldset legend {
     border: 2px groove var(--dark-color);
     font-size: 1.5rem;
     padding: 0 0.5rem 0.5rem;
     font-weight: 600;
 }
 
-.user-form form label,
+.user-form fieldset label,
 .post-form form label {
+    display: inline-block;
+    width: 100%;
     font-size: 1.25rem;
     font-weight: 600;
 }
 
-.user-form form input,
+.user-form * input,
 .post-form form input {
+    display: inline-block;
     width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
+    margin: 0 auto 0.5rem;
+    padding: 1rem;
     border: initial;
 }
 
-.user-form form input:focus {
+.user-form * input:focus {
     border: 2px solid var(--dark-color);
 }
 
 /* All Form Button Styles */
-.user-form form input[type="submit"],
+.user-form fieldset input[type="submit"],
 .comment-form input[type="submit"],
 .post-form input[type="submit"],
 .post-form input[type="button"] {
@@ -322,8 +336,8 @@ main {
     transition: color, background-color 0.5s ease-in;
 }
 
-.user-form form input[type="submit"]:hover,
-.user-form form input[type="submit"]:focus,
+.user-form fieldset input[type="submit"]:hover,
+.user-form input[type="submit"]:focus,
 .comment-form form input[type="submit"]:hover,
 .comment-form form input[type="submit"]:focus,
 .post-form input[type="submit"]:hover,

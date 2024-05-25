@@ -5,7 +5,16 @@
     "main": "server.js",
     "type": "commonjs",
     "nodemonConfig": {
-        "ext": "js,json,handlebars"
+        "verbose": true,
+        "ext": "js,json,handlebars",
+        "ignore": [
+            "/public/**",
+            ".git",
+            "*yarn/**"
+        ],
+        "env": {
+            "DEBUG": "express:*"
+        }
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
