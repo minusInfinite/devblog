@@ -5,71 +5,37 @@
                 {{#if newPost}}
                     <legend>New Post</legend>
                     <label for="new-post-title">Title</label>
-                    <input
-                        type="text"
-                        name="new-post-title"
-                        id="new-post-title"
-                    />
+                    <input type="text" name="new-post-title" id="new-post-title" />
                     <label for="new-post-content">Content</label>
-                    <textarea
-                        name="new-post-content"
-                        id="new-post-content"
-                    ></textarea>
-                    <input
-                        type="submit"
-                        id="submit-new-post"
-                        value="Submit Post"
-                    />
+                    <textarea name="new-post-content" id="new-post-content"></textarea>
+                    <input type="submit" id="submit-new-post" value="Submit Post" />
                 {{/if}}
                 {{#if editPost}}
                     <legend id="post" data-id="{{post.id}}">Edit Post</legend>
                     <label for="edit-post-title">Title</label>
-                    <input
-                        type="text"
-                        name="edit-post-title"
-                        id="edit-post-title"
-                        value="{{post.title}}"
-                    />
+                    <input type="text" name="edit-post-title" id="edit-post-title" value="{{post.title}}" />
                     <label for="edit-post-content">Content</label>
-                    <textarea
-                        name="edit-post-content"
-                        id="edit-post-content"
-                    >{{post.content}}</textarea>
-                    <input
-                        type="submit"
-                        id="submit-edit-post"
-                        value="Edit Post"
-                    />
-                    <input
-                        type="button"
-                        id="btn-delete-post"
-                        value="Delete Post"
-                    />
+                    <textarea name="edit-post-content" id="edit-post-content">{{post.content}}</textarea>
+                    <input type="submit" id="submit-edit-post" value="Edit Post" />
+                    <input type="button" id="btn-delete-post" value="Delete Post" />
                 {{/if}}
                 {{#if editComment}}
                     <legend data-id="{{comment.id}}">Edit Comment</legend>
                     <label for="edit-post-content">Content</label>
-                    <textarea
-                        name="edit-post-content"
-                        id="edit-post-content"
-                    >{{comment.content}}</textarea>
-                    <input
-                        type="submit"
-                        id="submit-edit-comment"
-                        value="Submit Post"
-                    />
+                    <textarea name="edit-post-content" id="edit-post-content">{{comment.content}}</textarea>
+                    <input type="submit" id="submit-edit-comment" value="Submit Post" />
                 {{/if}}
             </fieldset>
         </form>
     </div>
-</section>
 
-{{#if newPost}}
-   <script src="{{basePath}}js/submitpost.js"></script>
-{{/if}}
-{{#if editPost}}
-   <script src="{{basePath}}js/updatepost.js"></script>
-{{/if}}
-{{#if editComment}}
-   <script src="{{basePath}}js/updatecomment.js"></script>
-{{/if}}
+    {{#if newPost}}
+        <script src="{{basePath}}js/submitpost.js"></script>
+    {{/if}}
+    {{#if editPost}}
+        <script src="{{basePath}}js/updatepost.js"></script>
+    {{/if}}
+    {{#if editComment}}
+        <script src="{{basePath}}js/updatecomment.js"></script>
+    {{/if}}
+</section>

@@ -2,9 +2,9 @@ const { Post, User, Comment } = require("../models")
 const isAuth = require("../utils/auth")
 
 const homeRouter = require("express").Router()
-const basePath = process.env.ROOT ? `/${process.env.ROOT}/` : "./"
+const basePath = process.env.ROOT ? `/${process.env.ROOT}/` : "/"
 
-homeRouter.get("/", async (req, res,next) => {
+homeRouter.get("/", async (req, res, next) => {
     try {
         const postData = await Post.findAll({
             include: [
@@ -27,7 +27,7 @@ homeRouter.get("/", async (req, res,next) => {
     }
 })
 
-homeRouter.get("/dashboard", isAuth, async (req, res,next) => {
+homeRouter.get("/dashboard", isAuth, async (req, res, next) => {
     try {
         const postData = await Post.findAll({
             where: { user_id: req.session.user_id },
@@ -45,7 +45,7 @@ homeRouter.get("/dashboard", isAuth, async (req, res,next) => {
     }
 })
 
-homeRouter.get("/new/post", isAuth, async (req, res,next) => {
+homeRouter.get("/new/post", isAuth, async (req, res, next) => {
     try {
         res.render("newedit", {
             basePath,
@@ -59,7 +59,7 @@ homeRouter.get("/new/post", isAuth, async (req, res,next) => {
     }
 })
 
-homeRouter.get("/edit/post/:id", isAuth, async (req, res,next) => {
+homeRouter.get("/edit/post/:id", isAuth, async (req, res, next) => {
     try {
         const postData = await Post.findByPk(req.params.id)
 
@@ -78,7 +78,7 @@ homeRouter.get("/edit/post/:id", isAuth, async (req, res,next) => {
     }
 })
 
-homeRouter.get("/edit/comment/:id", isAuth, async (req, res,next) => {
+homeRouter.get("/edit/comment/:id", isAuth, async (req, res, next) => {
     try {
         const commentData = await Comment.findByPk(req.params.id)
 
@@ -97,7 +97,7 @@ homeRouter.get("/edit/comment/:id", isAuth, async (req, res,next) => {
     }
 })
 
-homeRouter.get("/post/:id", async (req, res,next) => {
+homeRouter.get("/post/:id", async (req, res, next) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
@@ -117,7 +117,7 @@ homeRouter.get("/post/:id", async (req, res,next) => {
         const comments = commentData.map((comment) =>
             comment.get({ plain: true })
         )
-
+        console.log(res.locals)
         res.render("post", {
             basePath,
             post,
@@ -130,12 +130,13 @@ homeRouter.get("/post/:id", async (req, res,next) => {
 })
 
 homeRouter.get("/login", (req, res) => {
+
     if (req.session.logged_in) {
-        res.redirect("/")
+        res.redirect("./")
         return
     }
 
-    res.render("login",{basePath})
+    res.render("login", { basePath })
 })
 
 module.exports = homeRouter

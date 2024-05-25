@@ -4,16 +4,22 @@ const editPost = async (event) => {
     const postID = document.querySelector("#post").dataset.id
     const title = document.querySelector("#edit-post-title").value.trim()
     const content = document.querySelector("#edit-post-content").value.trim()
+    const csrfToken = document.querySelector("meta[name=csrf-token]") === HTMLMetaElement
+        ?
+        document.querySelector("meta[name=csrf-token]").getAttribute('content')
+        : undefined;
 
     if (title && content) {
-        const response = await fetch(`${getRoot()}/api/posts/${postID}`, {
+        const response = await fetch(`${getRoot()}api/posts/${postID}`, {
             method: "PUT",
             body: JSON.stringify({ title, content }),
-            headers: { "Content-Type": "application/json" },
+            headers: csrfToken ?
+                { "Content-Type": "application/json", "x-csrf-token": csrfToken } :
+                { "Content-Type": "application/json" },
         })
 
         if (response.status === 201) {
-            document.location.assign(`${getRoot()}/dashboard`)
+            document.location.assign(`${getRoot()}dashboard`)
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             displayModal(errMsg.errors[0].message)
@@ -28,12 +34,12 @@ const deletePost = async (event) => {
 
     const postID = document.querySelector("#post").dataset.id
 
-    const response = await fetch(`./api/posts/${postID}`, {
+    const response = await fetch(`${getRoot()}api/posts/${postID}`, {
         method: "DELETE",
     })
 
     if (response.status === 204) {
-        document.location.assign(`${getRoot()}/dashboard`)
+        document.location.assign(`${getRoot()}dashboard`)
     } else {
         const errMsg = await response.json((msg) => JSON.parse(msg))
         displayModal(errMsg.errors[0].message)

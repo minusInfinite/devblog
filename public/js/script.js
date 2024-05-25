@@ -22,6 +22,14 @@ const displayModal = function (message) {
 }
 
 const getRoot = function () {
-    const root = window.location.pathname.split("/")[1]  
-    return root
+    const base = ["login", "logout", "dashboard", "edit", "post", "new"]
+    const root = window.location.pathname.split("/")[1]
+    let baseRoot = base.includes(root) ? `/` : `/${root}/`
+
+    return baseRoot
+}
+
+const getToken = async () => {
+    const res = await fetch('./csrf-token')
+    return await res.json()
 }

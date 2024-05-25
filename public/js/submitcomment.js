@@ -5,7 +5,7 @@ const submitContent = async (event) => {
     const content = document.querySelector("#comment-content").value.trim()
 
     if (content) {
-        const response = await fetch(`/${getRoot()}/api/posts/${postId}`, {
+        const response = await fetch(`${getRoot()}api/posts/${postId}`, {
             method: "POST",
             body: JSON.stringify({ content }),
             headers: { "Content-Type": "application/json" },

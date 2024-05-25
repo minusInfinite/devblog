@@ -1,3 +1,4 @@
+const { csrfProtection } = require("../../middleware/csrf.js")
 const { User } = require("../../models")
 
 const userRouter = require("express").Router()
