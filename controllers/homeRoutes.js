@@ -145,7 +145,7 @@ homeRouter.get("/login", (req, res) => {
     const _csrf = generateToken(req, res)
 
     if (req.session.logged_in) {
-        res.redirect("./")
+        res.redirect("back")
         return
     }
 

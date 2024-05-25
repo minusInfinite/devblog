@@ -29,8 +29,6 @@ const sess = {
         maxAge: 1000 * 60 * 60,
         sameSite: "strict",
         path: "/",
-        httpOnly: isProd,
-        secure: isProd
     },
     resave: false,
     name: "connect.blog.sid",
@@ -54,7 +52,7 @@ async function StartServer() {
     if (!isProd) {
         app.use(morgan(':method :url :status :response-time ms - :res[content-length] :req-headers'));
     } else {
-        app.use(morgan("short"))
+        app.use(morgan("dev"))
     }
 
     app.use(express.json())

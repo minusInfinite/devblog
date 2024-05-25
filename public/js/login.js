@@ -18,7 +18,7 @@ const loginForm = async (event) => {
             })
 
             if (response.status === 200) {
-                document.location.replace(`./dashboard`)
+                window.location.assign("./")
             } else {
                 const errMsg = await response.json((msg) => JSON.parse(msg))
                 displayModal(errMsg.errors[0].message)
