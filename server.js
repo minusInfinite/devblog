@@ -33,7 +33,7 @@ const sess = {
     },
     resave: false,
     proxy: true,
-    name: "connect.blog.sid",
+    name: "__Host-minusinfinite.blog.sid",
     saveUninitialized: false,
     store: new SequelizeStore({
         db: sequelize,

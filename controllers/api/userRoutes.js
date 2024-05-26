@@ -1,4 +1,3 @@
-const { csrfProtection } = require("../../middleware/csrf.js")
 const { User } = require("../../models")
 
 const userRouter = require("express").Router()
@@ -54,8 +53,6 @@ userRouter.post("/login", async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id
             req.session.logged_in = true
-
-            console.log(req.session.cookie)
 
             res.status(200).json({
                 message: "You're now logged in!",
