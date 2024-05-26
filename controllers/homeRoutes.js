@@ -8,6 +8,7 @@ const basePath = process.env.ROOT ? `/${process.env.ROOT}/` : "/"
 
 homeRouter.get("/", async (req, res, next) => {
     try {
+        let _csrf
         const postData = await Post.findAll({
             include: [
                 {
@@ -19,10 +20,15 @@ homeRouter.get("/", async (req, res, next) => {
 
         const posts = postData.map((post) => post.get({ plain: true })).reverse()
 
+        if (req.session.logged_in) {
+            _csrf = generateToken(req, res)
+        }
+
         res.render("homepage", {
             basePath,
             posts,
             logged_in: req.session.logged_in,
+            _csrf: _csrf ? _csrf : undefined
         })
     } catch (err) {
         next()

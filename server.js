@@ -29,8 +29,10 @@ const sess = {
         maxAge: 1000 * 60 * 60,
         sameSite: "strict",
         path: "/",
+        secure: true,
     },
     resave: false,
+    proxy: true,
     name: "connect.blog.sid",
     saveUninitialized: false,
     store: new SequelizeStore({
@@ -43,6 +45,7 @@ async function StartServer() {
 
     morgan.token('req-headers', function (req, res) {
         if (req.method === "POST")
+
             return JSON.stringify(req.headers);
     })
 
@@ -58,7 +61,7 @@ async function StartServer() {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
-    app.set('trust-proxy', 'loopback, uniquelocal')
+    app.set('trust-proxy', ['loopback', '192.168.64.0/25'])
 
     app.use(function (req, res, next) {
         res.set(

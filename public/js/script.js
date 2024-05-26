@@ -29,7 +29,7 @@ const getRoot = function () {
     return baseRoot
 }
 
-const getToken = () => {
-    const token = document.querySelector("meta[name=csrf-token]").content
+const getToken = async () => {
+    let token = document.querySelector("meta[name=csrf-token]").content
     return { token }
 }

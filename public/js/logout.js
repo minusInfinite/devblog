@@ -1,5 +1,5 @@
 const logout = async () => {
-    const { token } = getToken()
+    const { token } = await getToken()
     const response = await fetch(`${getRoot()}api/users/logout`, {
         method: "Post",
         headers: {
