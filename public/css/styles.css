@@ -65,13 +65,13 @@ header h1 {
     box-shadow: 0.5rem 0.5rem rgb(95, 95, 95);
 }
 
-@media screen and (width <=32em) {
+@media screen and (width <=46em) {
     header {
         flex-direction: column-reverse;
     }
 
     header h1 {
-        margin-left: 0;
+        margin: 0.5em auto;
     }
 }
 
@@ -119,7 +119,7 @@ nav a {
     color: inherit;
 }
 
-@media screen and (width <=32em) {
+@media screen and (width <=46em) {
     nav {
         margin: 0 auto;
         text-align: center;

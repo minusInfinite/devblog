@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{#if _csrf}}
-    <meta name="csrf-token" content="{{_csrf}}" />
+        <meta name="csrf-token" content="{{_csrf}}" />
     {{/if}}
     <link rel="stylesheet" href="{{basePath}}css/styles.css" />
     <link rel="icon" type="image/png" href="{{basePath}}favicon.png" />
@@ -17,17 +17,17 @@
 <body>
     <header>
         <nav>
-        <ul>
-            <li><a href="{{basePath}}">Home</a></li>
-            {{#if logged_in}}
-                <li><a href="{{basePath}}dashboard">Dashboard</a></li>
-                <li><a href="#logout" id="logout">Logout</a></li>
-            {{else}}
-                <li><a href="{{basePath}}login">Admin Login</a></li>
-            {{/if}}
-        </ul>
-    </nav>
-    <h1>The minusInfinite Blog</h1>
+            <ul>
+                <li><a href="{{basePath}}">Home</a></li>
+                {{#if logged_in}}
+                    <li><a href="{{basePath}}dashboard">Dashboard</a></li>
+                    <li><a href="#logout" id="logout">Logout</a></li>
+                {{else}}
+                    <li><a href="{{basePath}}login">Admin Login</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+        <h1>The minusInfinite Blog</h1>
     </header>
     <main>
         {{{body}}}
