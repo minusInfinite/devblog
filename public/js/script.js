@@ -30,6 +30,6 @@ const getRoot = function () {
 }
 
 const getToken = () => {
-    const token = document.querySelector("meta[name=csrf-token]").content
+    let token = document.querySelector("meta[name=csrf-token]").content
     return { token }
 }

@@ -47,6 +47,7 @@ async function StartServer() {
 
     morgan.token('req-headers', function (req, res) {
         if (req.method === "POST")
+
             return JSON.stringify(req.headers);
     })
 
