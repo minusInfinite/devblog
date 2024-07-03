@@ -8,6 +8,8 @@ const basePath = process.env.ROOT ? `/${process.env.ROOT}/` : "/"
 
 homeRouter.get("/", async (req, res, next) => {
     try {
+
+        const _csrf = req.session.logged_in ? generateToken(req,res) : undefined
         const postData = await Post.findAll({
             include: [
                 {
@@ -20,6 +22,7 @@ homeRouter.get("/", async (req, res, next) => {
         const posts = postData.map((post) => post.get({ plain: true })).reverse()
 
         res.render("homepage", {
+            _csrf,
             basePath,
             posts,
             logged_in: req.session.logged_in,
@@ -110,7 +113,7 @@ homeRouter.get("/edit/comment/:id", isAuth, async (req, res, next) => {
 
 homeRouter.get("/post/:id", async (req, res, next) => {
     try {
-        const _csrf = generateToken(req, res)
+        const _csrf = req.session.logged_in ? generateToken(req, res) : undefined
         const postData = await Post.findByPk(req.params.id, {
             include: [
                 {
@@ -142,7 +145,7 @@ homeRouter.get("/post/:id", async (req, res, next) => {
 })
 
 homeRouter.get("/login", (req, res) => {
-    const _csrf = generateToken(req, res)
+    const _csrf = generateToken(req, res,{overwrite: true})
 
     if (req.session.logged_in) {
         res.redirect("back")

@@ -16,7 +16,9 @@ html {
     box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: inherit;
 
 }
@@ -40,16 +42,20 @@ a {
 
 /* Header */
 header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
     position: relative;
-    top: 0;
-    width: 100vw;
-    padding: 3rem 0.8rem 0.1rem 0.8rem;
+    width: 100%;
+    padding: 1rem 1rem 0;
     background-color: var(--dark-color);
     color: var(--base-color);
 }
 
 header h1 {
-    padding: 0.8rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.8rem 0.5rem 0.5rem;
     margin-left: 2rem;
     border: 1px solid var(--base-color);
     border-radius: 1rem;
@@ -59,10 +65,19 @@ header h1 {
     box-shadow: 0.5rem 0.5rem rgb(95, 95, 95);
 }
 
+@media screen and (width <=32em) {
+    header {
+        flex-direction: column-reverse;
+    }
+
+    header h1 {
+        margin-left: 0;
+    }
+}
+
 /* Navigation */
 nav {
-    position: absolute;
-    top: 0.3rem;
+    flex: 1;
     color: var(--base-color);
 }
 
@@ -102,6 +117,19 @@ nav a:focus {
 nav a {
     text-decoration: underline dashed;
     color: inherit;
+}
+
+@media screen and (width <=32em) {
+    nav {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    nav li:not(:last-child) {
+        border-right: 0;
+        border-bottom: 1px solid var(--base-color);
+        width: 100%;
+    }
 }
 
 /* **MAIN CONTAINTER** */
@@ -224,6 +252,7 @@ main {
     border: 2px solid rgba(0, 0, 0, 0);
     transition: color, background-color 1s ease-out;
 }
+
 .new-post-btn:hover,
 .new-post-btn:focus {
     background-color: var(--base-color);
