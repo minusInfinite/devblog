@@ -13,7 +13,7 @@
             "*yarn/**"
         ],
         "env": {
-            "DEBUG": "express-session"
+            "DEBUG": "express-session*"
         }
     },
     "scripts": {

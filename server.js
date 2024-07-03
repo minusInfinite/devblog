@@ -29,11 +29,13 @@ const sess = {
         maxAge: 1000 * 60 * 60,
         sameSite: "strict",
         path: "/",
+        httpOnly: isProd,
         secure: true,
+        domain: "minusinfinite.id.au"
     },
     resave: false,
-    proxy: true,
-    name: "__Host-minusinfinite.blog.sid",
+    name: "__Secure-minusinfinite.blog.sid",
+    proxy: isProd,
     saveUninitialized: false,
     store: new SequelizeStore({
         db: sequelize,
@@ -61,7 +63,7 @@ async function StartServer() {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
-    app.set('trust-proxy', ['loopback', '192.168.64.0/25'])
+    app.set('trust-proxy', ['loopback', '192.168.64.0/24'])
 
     app.use(function (req, res, next) {
         res.set(
@@ -87,7 +89,7 @@ async function StartServer() {
         throw new Error(e)
     }
 
-    app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}, https://intranet.minusinfinite.id.au/dev`))
+    app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}, https://www.minusinfinite.id.au/blog`))
 
 }
 
