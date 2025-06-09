@@ -85,6 +85,13 @@ async function StartServer() {
     app.use(express.static(path.join(__dirname, "public")))
     app.use(routes)
 
+    app.use((req, res, next) => {
+        if (process.env.SHUTDOWN_DOWN) {
+            res.setHeader('Connection', 'close')
+        }
+        next()
+    })
+
     try {
         await sequelize.sync({ force: false })
         app.use(makeAdmin)
@@ -92,9 +99,43 @@ async function StartServer() {
         throw new Error(e)
     }
 
-    app.listen(PORT, () => console.log(`Server Running http://localhost:${PORT}, https://www.minusinfinite.id.au/blog`))
+
+    const server = app.listen(PORT, () => {
+        console.log(`Server Running http://localhost:${PORT}, https://www.minusinfinite.id.au/blog`)
+        process?.send ? process.send('ready') : null;
+    })
+
+    process.on('SIGTERM', () => {
+        consoe.log('SIGTERM signal received')
+        process.env.SHUTDOWN_DOWN = true;
+        server.close(async () => {
+            try {
+                await sequelize.close()
+                console.log('database disconnected')
+                process.exitCode = 0
+            } catch (e) {
+                throw new Error('SIGTERM Error', { cause: e })
+            }
+        })
+    })
+
+    process.on('SIGINT', () => {
+        console.log('SIGINI signal received')
+        process.env.SHUTDOWN_DOWN = true;
+
+        server.close(async () => {
+            try {
+                await sequelize.close()
+                console.log('database disconnected')
+                process.exitCode = 0
+            } catch (e) {
+                throw new Error('SIGINT Error', { cause: e })
+            }
+        })
+    })
 
 }
 
-StartServer()
-    .catch((err) => console.log(err))
+StartServer().catch((err) => {
+    console.error('Server Error', {cause: err})
+})

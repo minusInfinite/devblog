@@ -112,4 +112,4 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
-ecosystem.config.js
+ecosystem.config.json
