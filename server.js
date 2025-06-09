@@ -3,6 +3,7 @@ const path = require("path")
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
+const compression = require("compression")
 const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const exqhbs = require("express-handlebars")
@@ -45,7 +46,7 @@ const sess = {
 
 async function StartServer() {
 
-    morgan.token('req-headers', function (req, res) {
+    morgan.token('req-headers', function(req, res) {
         if (req.method === "POST")
 
             return JSON.stringify(req.headers);
@@ -53,6 +54,7 @@ async function StartServer() {
 
     const hbs = exqhbs.create({ helpers })
     const app = express()
+    app.use(compression())
 
     if (!isProd) {
         app.use(morgan(':method :url :status :response-time ms - :res[content-length] :req-headers'));
@@ -65,7 +67,8 @@ async function StartServer() {
 
     app.set('trust-proxy', ['loopback', '192.168.64.0/24'])
 
-    app.use(function (req, res, next) {
+
+    app.use(function(req, res, next) {
         res.set(
             'Content-Security-Policy',
             "default-src 'self'; font-src 'self' https://fonts.gstatic.com/; style-src 'self' https://fonts.googleapis.com"
