@@ -54,7 +54,12 @@ async function StartServer() {
 
     const hbs = exqhbs.create({ helpers })
     const app = express()
+
+    app.set('trust-proxy', ['loopback', '192.168.64.0/24'])
+
+    app.use(cors())
     app.use(compression())
+    app.use(session(sess))
 
     if (!isProd) {
         app.use(morgan(':method :url :status :response-time ms - :res[content-length] :req-headers'));
@@ -65,9 +70,6 @@ async function StartServer() {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
-    app.set('trust-proxy', ['loopback', '192.168.64.0/24'])
-
-
     app.use(function(req, res, next) {
         res.set(
             'Content-Security-Policy',
@@ -76,8 +78,6 @@ async function StartServer() {
         next()
     })
 
-    app.use(cors())
-    app.use(session(sess))
     app.use(cookieParser(process.env.PSECRET))
 
     app.engine("handlebars", hbs.engine)
@@ -108,34 +108,29 @@ async function StartServer() {
     process.on('SIGTERM', () => {
         consoe.log('SIGTERM signal received')
         process.env.SHUTDOWN_DOWN = true;
-        server.close(async () => {
-            try {
-                await sequelize.close()
+        server.close(() => {
+            sequelize.close().then(() => {
                 console.log('database disconnected')
-                process.exitCode = 0
-            } catch (e) {
+            }).catch((e) => {
                 throw new Error('SIGTERM Error', { cause: e })
-            }
+            })
         })
     })
 
     process.on('SIGINT', () => {
         console.log('SIGINI signal received')
         process.env.SHUTDOWN_DOWN = true;
-
-        server.close(async () => {
-            try {
-                await sequelize.close()
+        server.close(() => {
+            sequelize.close().then(() => {
                 console.log('database disconnected')
-                process.exitCode = 0
-            } catch (e) {
+            }).catch((e) => {
                 throw new Error('SIGINT Error', { cause: e })
-            }
+            })
         })
     })
 
 }
 
 StartServer().catch((err) => {
-    console.error('Server Error', {cause: err})
+    console.error('Server Error', { cause: err })
 })
